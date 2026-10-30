@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: saleslt
+    description: "Raw transactional and master data from AdventureWorksLT2019 database"
+    database: AdventureWorksLT2019
+    schema: SalesLT
+
+    tables:
+      - name: Customer
+        description: "Customer master records including company and contact details"
+
+      - name: Product
+        description: "Product catalog including pricing and categorization details"
+
+      - name: ProductCategory
+        description: "Hierarchical product categories"
+
+      - name: SalesOrderDetail
+        description: "Individual line item details for customer orders"
+
+      - name: SalesOrderHeader
+        description: "Customer sales order transactions header"
+        loaded_at_field: ModifiedDate
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
